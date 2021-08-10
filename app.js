@@ -49,7 +49,6 @@ app.get("/", async (req, res) => {
 app.get("/notes/new", async (req, res) => {
   const notes = await Note.find();
   res.render("new", { notes: notes });
-  //console.log(parser(req.headers["user-agent"]));
   const path = req.originalUrl;
   const userAgent = parser(req.headers["user-agent"]);
    try {
@@ -126,8 +125,6 @@ app.get("/notes/:id/edit", async (req, res, next) => {
 });
 
 app.get('/analytics',async(req,res)=>{
-  const pageViews = await VisitorsSchema.find().sort({count : 'descending'})
-  res.render('analytics',{pageViews})
   const path = req.originalUrl;
   const userAgent = parser(req.headers["user-agent"]);
    try {
@@ -143,6 +140,9 @@ app.get('/analytics',async(req,res)=>{
   } catch (error) {
     console.log(error)
   }
+  const pageViews = await VisitorsSchema.find().sort({count : 'descending'})
+  res.render('analytics',{pageViews})
+
 })
 
 app.patch("/notes/:id", async (req, res) => {
