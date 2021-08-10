@@ -1,0 +1,16 @@
+extends layout 
+
+block content
+    table(style='width:50%', border='1')
+        thead 
+            tr  
+                th Path 
+                th visits 
+        tbody 
+        each head  in pageViews
+            tr
+                td= head.path
+                td= head.count
+
+
+
